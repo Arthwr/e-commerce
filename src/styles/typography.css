@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Outfit Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Outfit Regular"), url("../assets/fonts/OutfitRegular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Outfit ExtraLight";
+  font-style: normal;
+  font-weight: 200;
+  src: local("Outfit ExtraLight"), url("../assets/fonts/OutfitExtraLight.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Outfit Light";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Outfit Light"), url("../assets/fonts/OutfitLight.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Outfit Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Outfit Medium"), url("../assets/fonts/OutfitMedium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Outfit SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Outfit SemiBold"), url("../assets/fonts/OutfitSemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Outfit Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Outfit Bold"), url("../assets/fonts/OutfitBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Outfit ExtraBold";
+  font-style: normal;
+  font-weight: 800;
+  src: local("Outfit ExtraBold"), url("../assets/fonts/OutfitExtraBold.woff") format("woff");
+}
