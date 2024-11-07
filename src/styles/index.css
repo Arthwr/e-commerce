@@ -5,6 +5,9 @@
   font-family: "outfit regular", "system-ui", "sans-serif";
   font-weight: 400;
   font-size: 16px;
+  --color-charcoal: rgb(47, 62, 70);
+  --color-charcoal-grey: rgba(47, 62, 70, 0.8);
+  --color-light-red: rgb(255, 107, 107);
 }
 
 /* Screen readers */

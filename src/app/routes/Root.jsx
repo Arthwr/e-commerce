@@ -1,7 +1,9 @@
+import Header from "../../components/Header/Header.jsx";
+
 export default function Root() {
   return (
     <>
-      <div>Hello, World!</div>
+      <Header />
     </>
   );
 }
