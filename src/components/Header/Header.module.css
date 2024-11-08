@@ -46,6 +46,10 @@ nav {
   gap: 2rem;
 }
 
+.logo {
+  display: none;
+}
+
 .right {
   display: flex;
   gap: 2rem;
