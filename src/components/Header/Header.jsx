@@ -26,6 +26,7 @@ export default function Header() {
           <Link to="/cart">
             <img src={cartIcon} alt="" aria-hidden="true" />
             <span>Cart</span>
+            <div className={styles.counter}>14</div>
           </Link>
         </div>
       </nav>
