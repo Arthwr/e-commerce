@@ -5,10 +5,16 @@
   font-family: "outfit regular", "system-ui", "sans-serif";
   font-weight: 400;
   font-size: 16px;
-  --color-white: rgb(255, 255, 255);
+  --color-white-smoke: rgb(245, 245, 245);
+  --color-eerie-black: rgb(31, 31, 31);
   --color-charcoal: rgb(47, 62, 70);
   --color-charcoal-grey: rgba(47, 62, 70, 0.8);
   --color-light-red: rgb(255, 107, 107);
+}
+
+#root {
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 /* Screen readers */
