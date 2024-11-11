@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-img img {
+  border-radius: 0.5rem;
+}
+
+.rating {
+  display: flex;
+  gap: 5px;
+}
+
+.info {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.description {
+  font-family: "outfit light";
+  color: var(--color-charcoal-grey);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
