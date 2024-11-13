@@ -6,11 +6,12 @@ export default function useHorizontalDrag({
   minimumVelocity = 0.3,
   friction = 0.96,
 } = {}) {
+  const [isDragging, setIsDragging] = useState(false);
+
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
 
   useEffect(() => {
     return () => {
@@ -29,8 +30,8 @@ export default function useHorizontalDrag({
       if (sliderRef.current) {
         setIsDragging(true);
         const clientX = getClientX(e);
-        setStartX(clientX - sliderRef.current.offsetLeft);
-        setScrollLeft(sliderRef.current.scrollLeft);
+        startXRef.current = clientX - sliderRef.current.offsetLeft;
+        scrollLeftRef.current = sliderRef.current.scrollLeft;
       }
     },
     [getClientX]
@@ -41,21 +42,21 @@ export default function useHorizontalDrag({
       if (!isDragging || !sliderRef.current) return;
       e.preventDefault();
       const x = getClientX(e) - sliderRef.current.offsetLeft;
-      const walk = (x - startX) * sensitivity;
-      sliderRef.current.scrollLeft = scrollLeft - walk;
+      const walk = (x - startXRef.current) * sensitivity;
+      sliderRef.current.scrollLeft = scrollLeftRef.current - walk;
     },
-    [isDragging, startX, scrollLeft, sensitivity, getClientX]
+    [isDragging, sensitivity, getClientX]
   );
 
   const handleDragMomentum = useCallback(
     (e) => {
       if (!sliderRef.current) return;
 
-      const distance = getClientX(e) - sliderRef.current.offsetLeft - startX;
+      const distance = getClientX(e) - sliderRef.current.offsetLeft - startXRef.current;
       let initialVelocity = distance * momentumMultiplier;
 
       if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef);
+        cancelAnimationFrame(animationFrameRef.current);
       }
 
       const animateMomentum = () => {
@@ -82,7 +83,7 @@ export default function useHorizontalDrag({
       setIsDragging(false);
       animationFrameRef.current = requestAnimationFrame(animateMomentum);
     },
-    [startX, momentumMultiplier, friction, minimumVelocity, getClientX]
+    [momentumMultiplier, friction, minimumVelocity, getClientX]
   );
 
   const handleDragEnd = useCallback(() => {
@@ -105,7 +106,6 @@ export default function useHorizontalDrag({
   return {
     sliderRef,
     isDragging,
-    handleDragStart,
     dragProps,
   };
 }
