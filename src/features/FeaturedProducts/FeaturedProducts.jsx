@@ -4,19 +4,17 @@ import ProductCard from "@components/ProductCard/ProductCard.jsx";
 import styles from "./FeaturedProducts.module.css";
 
 export default function FeaturedProducts() {
-  const { sliderRef, isDragging, handleDragStart, handleDragMove, handleDragEnd } = useHorizontalDrag();
+  const { sliderRef, isDragging, dragProps } = useHorizontalDrag({
+    sensitivity: 1.5,
+    momentumMultiplier: 0.08,
+    friction: 0.96,
+    minimumVelocity: 0.3,
+  });
 
   return (
     <section className={styles.featured}>
       <SegmentHeader label="Explore today" />
-      <div
-        ref={sliderRef}
-        onMouseDown={handleDragStart}
-        onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
-        className={`${styles.slider} ${isDragging ? styles.grabbing : ""}`}
-      >
+      <div ref={sliderRef} {...dragProps} className={`${styles.slider} ${isDragging ? styles.grabbing : ""}`}>
         <ProductCard />
         <ProductCard />
         <ProductCard />
