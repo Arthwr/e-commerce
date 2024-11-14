@@ -17,7 +17,7 @@ export default function Sustainability() {
           </div>
           <ActionButton path="/about" label="Learn more" ariaLabel="learn about us" />
         </div>
-        <div>
+        <div className={styles["img-wrapper"]}>
           <img src={img} alt="" width={1200} height={800} />
         </div>
       </div>
