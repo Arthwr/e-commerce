@@ -12,6 +12,8 @@
   --color-light-red: rgb(255, 107, 107);
   --color-mint-cream: rgb(232, 243, 235);
   --color-columbia-blue: rgba(188, 217, 238, 0.7);
+  --color-oxford-blue: rgb(10, 34, 57);
+  --color-white: rgb(255, 255, 255);
 }
 
 #root {
