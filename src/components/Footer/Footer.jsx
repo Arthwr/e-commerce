@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import DevFooter from "@components/DevFooter/DevFooter.jsx";
 import twIcon from "@assets/svg/tw-icon.svg";
 import igIcon from "@assets/svg/ig-icon.svg";
 import fbIcon from "@assets/svg/fb-icon.svg";
@@ -31,6 +32,7 @@ export default function Footer() {
           <Link to="/about">Contact Us</Link>
         </nav>
       </section>
+      <DevFooter />
     </footer>
   );
 }
