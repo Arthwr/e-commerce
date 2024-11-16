@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function useHorizontalDrag({
-  sensitivity = 1.5,
+  sensitivity = 1,
   momentumMultiplier = 0.08,
   minimumVelocity = 0.3,
   friction = 0.96,
+  momentumTimeout = 10,
 } = {}) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -12,6 +13,7 @@ export default function useHorizontalDrag({
   const animationFrameRef = useRef(null);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
+  const lastMoveTimeRef = useRef(0);
 
   useEffect(() => {
     return () => {
@@ -32,6 +34,7 @@ export default function useHorizontalDrag({
         const clientX = getClientX(e);
         startXRef.current = clientX - sliderRef.current.offsetLeft;
         scrollLeftRef.current = sliderRef.current.scrollLeft;
+        lastMoveTimeRef.current = Date.now();
       }
     },
     [getClientX]
@@ -41,6 +44,9 @@ export default function useHorizontalDrag({
     (e) => {
       if (!isDragging || !sliderRef.current) return;
       e.preventDefault();
+
+      lastMoveTimeRef.current = Date.now();
+
       const x = getClientX(e) - sliderRef.current.offsetLeft;
       const walk = (x - startXRef.current) * sensitivity;
       sliderRef.current.scrollLeft = scrollLeftRef.current - walk;
@@ -52,38 +58,44 @@ export default function useHorizontalDrag({
     (e) => {
       if (!sliderRef.current) return;
 
-      const distance = getClientX(e) - sliderRef.current.offsetLeft - startXRef.current;
-      let initialVelocity = distance * momentumMultiplier;
+      const currentTime = Date.now();
+      const timeSinceLastMove = currentTime - lastMoveTimeRef.current;
 
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
+      if (timeSinceLastMove <= momentumTimeout) {
+        const distance = getClientX(e) - sliderRef.current.offsetLeft - startXRef.current;
+        let initialVelocity = distance * momentumMultiplier;
 
-      const animateMomentum = () => {
-        if (Math.abs(initialVelocity) < minimumVelocity) {
+        if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
-          return;
         }
 
-        initialVelocity *= friction;
-        if (sliderRef.current) {
-          const newScrollLeft = sliderRef.current.scrollLeft - initialVelocity;
-
-          if (newScrollLeft <= 0 || newScrollLeft >= sliderRef.current.scrollWidth - sliderRef.current.clientWidth) {
+        const animateMomentum = () => {
+          if (Math.abs(initialVelocity) < minimumVelocity) {
             cancelAnimationFrame(animationFrameRef.current);
             return;
           }
 
-          sliderRef.current.scrollLeft = newScrollLeft;
-        }
+          initialVelocity *= friction;
+          if (sliderRef.current) {
+            const newScrollLeft = sliderRef.current.scrollLeft - initialVelocity;
+
+            if (newScrollLeft <= 0 || newScrollLeft >= sliderRef.current.scrollWidth - sliderRef.current.clientWidth) {
+              cancelAnimationFrame(animationFrameRef.current);
+              return;
+            }
+
+            sliderRef.current.scrollLeft = newScrollLeft;
+          }
+
+          animationFrameRef.current = requestAnimationFrame(animateMomentum);
+        };
 
         animationFrameRef.current = requestAnimationFrame(animateMomentum);
-      };
+      }
 
       setIsDragging(false);
-      animationFrameRef.current = requestAnimationFrame(animateMomentum);
     },
-    [momentumMultiplier, friction, minimumVelocity, getClientX]
+    [momentumMultiplier, friction, minimumVelocity, momentumTimeout, getClientX]
   );
 
   const handleDragEnd = useCallback(() => {
@@ -91,13 +103,11 @@ export default function useHorizontalDrag({
   }, []);
 
   const dragProps = {
-    // mouse events
     onMouseDown: handleDragStart,
     onMouseMove: isDragging ? handleDragMove : undefined,
     onMouseUp: handleDragMomentum,
     onMouseLeave: handleDragEnd,
 
-    // touch events
     onTouchStart: handleDragStart,
     onTouchMove: isDragging ? handleDragMove : undefined,
     onTouchEnd: handleDragMomentum,
