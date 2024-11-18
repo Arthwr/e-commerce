@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function useHorizontalDrag({
-  sensitivity = 1,
+  sensitivity = 1.2,
   momentumMultiplier = 0.08,
   minimumVelocity = 0.3,
   friction = 0.96,
@@ -15,20 +15,25 @@ export default function useHorizontalDrag({
   const scrollLeftRef = useRef(0);
   const lastMoveTimeRef = useRef(0);
 
-  useEffect(() => {
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
+  const stopMomentumAnimation = useCallback(() => {
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
   }, []);
 
   const getClientX = useCallback((e) => {
     return e.touches ? e.touches[0].clientX : e.pageX;
   }, []);
 
+  useEffect(() => {
+    return () => stopMomentumAnimation();
+  }, [stopMomentumAnimation]);
+
   const handleDragStart = useCallback(
     (e) => {
+      stopMomentumAnimation();
+
       if (sliderRef.current) {
         setIsDragging(true);
         const clientX = getClientX(e);
@@ -37,7 +42,7 @@ export default function useHorizontalDrag({
         lastMoveTimeRef.current = Date.now();
       }
     },
-    [getClientX]
+    [getClientX, stopMomentumAnimation]
   );
 
   const handleDragMove = useCallback(
@@ -60,18 +65,16 @@ export default function useHorizontalDrag({
 
       const currentTime = Date.now();
       const timeSinceLastMove = currentTime - lastMoveTimeRef.current;
+      const distance = getClientX(e) - sliderRef.current.offsetLeft - startXRef.current;
+
+      const velocity = distance / (timeSinceLastMove || 1);
 
       if (timeSinceLastMove <= momentumTimeout) {
-        const distance = getClientX(e) - sliderRef.current.offsetLeft - startXRef.current;
-        let initialVelocity = distance * momentumMultiplier;
-
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
+        let initialVelocity = velocity * momentumMultiplier;
 
         const animateMomentum = () => {
           if (Math.abs(initialVelocity) < minimumVelocity) {
-            cancelAnimationFrame(animationFrameRef.current);
+            stopMomentumAnimation();
             return;
           }
 
@@ -80,7 +83,7 @@ export default function useHorizontalDrag({
             const newScrollLeft = sliderRef.current.scrollLeft - initialVelocity;
 
             if (newScrollLeft <= 0 || newScrollLeft >= sliderRef.current.scrollWidth - sliderRef.current.clientWidth) {
-              cancelAnimationFrame(animationFrameRef.current);
+              stopMomentumAnimation();
               return;
             }
 
@@ -95,7 +98,7 @@ export default function useHorizontalDrag({
 
       setIsDragging(false);
     },
-    [momentumMultiplier, friction, minimumVelocity, momentumTimeout, getClientX]
+    [momentumMultiplier, friction, minimumVelocity, momentumTimeout, getClientX, stopMomentumAnimation]
   );
 
   const handleDragEnd = useCallback(() => {
