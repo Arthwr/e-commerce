@@ -10,7 +10,7 @@ export default function Header() {
       <nav>
         <div className={styles.left}>
           <div className={styles.logo}>
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" role="presentation" />
           </div>
           <div className={styles.links}>
             <Link to="/products">Products</Link>
@@ -20,11 +20,11 @@ export default function Header() {
         </div>
         <div className={styles.right}>
           <button>
-            <img src={searchIcon} alt="" aria-hidden="true" />
+            <img src={searchIcon} alt="" role="presentation" />
             <span>Search</span>
           </button>
           <Link to="/cart">
-            <img src={cartIcon} alt="" aria-hidden="true" />
+            <img src={cartIcon} alt="" role="presentation" />
             <span>Cart</span>
             <div className={styles.counter}>14</div>
           </Link>

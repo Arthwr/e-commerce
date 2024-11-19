@@ -11,7 +11,7 @@ describe("Footer component", () => {
       </MemoryRouter>
     );
 
-    const links = screen.getAllByRole("link", { name: /Help Center|Community|FAQ|Contact Us/ });
+    const links = screen.getAllByRole("link", { name: /Help Center|Community|FAQ|Contact Us/i });
     expect(links).toHaveLength(4);
 
     links.forEach((link) => {
