@@ -1,11 +1,11 @@
 import SegmentHeader from "@components/SegmentHeader/SegmentHeader.jsx";
+import ActionButton from "@components/ActionButton/ActionButton.jsx";
 import styles from "./Sustainability.module.css";
 import img from "@assets/images/sust-pic.webp";
-import ActionButton from "@components/ActionButton/ActionButton";
 
 export default function Sustainability() {
   return (
-    <section className={styles.sustainability}>
+    <section className={styles.sustainability} role="">
       <SegmentHeader label="Sustainability" />
       <div className={styles.content}>
         <div className={styles["info-group"]}>

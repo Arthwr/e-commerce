@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import ProductCard from "./ProductCard";
+import ProductCard from "./ProductCard.jsx";
 
 describe("Product card component", () => {
   const mockProduct = {
