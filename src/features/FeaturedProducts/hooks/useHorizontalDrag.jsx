@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function useHorizontalDrag({
-  sensitivity = 1.2,
+  sensitivity = 1.5,
   momentumMultiplier = 0.08,
   minimumVelocity = 0.3,
   friction = 0.96,
