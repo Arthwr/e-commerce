@@ -6,5 +6,5 @@ export default function SegmentHeader({ label }) {
 }
 
 SegmentHeader.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
 };
