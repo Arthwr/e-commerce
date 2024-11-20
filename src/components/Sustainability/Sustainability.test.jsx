@@ -18,4 +18,19 @@ describe("Sustainability component", () => {
       /Our products are made with over 60% recycled materials based on product weight./i
     );
   });
+
+  it("renders image correctly", () => {
+    render(
+      <MemoryRouter>
+        <Sustainability />
+      </MemoryRouter>
+    );
+
+    const image = screen.getByRole("img");
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute("src", expect.stringContaining("sust-pic.webp"));
+    expect(image).toHaveAttribute("width", "1200");
+    expect(image).toHaveAttribute("height", "800");
+    expect(image).toHaveAttribute("alt", "");
+  });
 });
