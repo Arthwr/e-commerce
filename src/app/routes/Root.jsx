@@ -1,6 +1,4 @@
-import Header from "@components/Header/Header.jsx";
-import HeroTitle from "@components/HeroTitle/HeroTitle.jsx";
-import Banner from "@components/Banner/Banner.jsx";
+import MainHeader from "@features/MainHeader/MainHeader.jsx";
 import FeaturedProducts from "@features/FeaturedProducts/FeaturedProducts.jsx";
 import Sustainability from "@components/Sustainability/Sustainability.jsx";
 import Footer from "@components/Footer/Footer.jsx";
@@ -8,9 +6,7 @@ import Footer from "@components/Footer/Footer.jsx";
 export default function Root() {
   return (
     <>
-      <Header />
-      <HeroTitle />
-      <Banner />
+      <MainHeader />
       <FeaturedProducts />
       <Sustainability />
       <Footer />

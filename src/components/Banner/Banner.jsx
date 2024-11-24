@@ -4,7 +4,7 @@ import styles from "./Banner.module.css";
 
 export default function Banner() {
   return (
-    <section className={styles.banner} role="banner">
+    <div className={styles.banner} role="banner">
       <div className={styles.container}>
         <img src={bannerImg} alt="" width={2292} height={675} role="img" />
         <div className={styles.cta}>
@@ -15,6 +15,6 @@ export default function Banner() {
           <ActionButton path="/products" label="Shop now" ariaLabel="shop products" />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

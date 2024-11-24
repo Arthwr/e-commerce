@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import Header from "./Header";
+import NavBar from "./NavBar.jsx";
 
-describe("Header component", () => {
+describe("NavBar component", () => {
   it("renders inner links correctly", () => {
     render(
       <MemoryRouter>
-        <Header />
+        <NavBar />
       </MemoryRouter>
     );
 
@@ -23,7 +23,7 @@ describe("Header component", () => {
   it("renders img icons correctly", () => {
     render(
       <MemoryRouter>
-        <Header />
+        <NavBar />
       </MemoryRouter>
     );
 
@@ -36,7 +36,7 @@ describe("Header component", () => {
   it("renders search button correctly", () => {
     render(
       <MemoryRouter>
-        <Header />
+        <NavBar />
       </MemoryRouter>
     );
 

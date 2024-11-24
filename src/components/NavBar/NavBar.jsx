@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import logo from "@assets/svg/main-logo.svg";
 import searchIcon from "@assets/svg/search-icon.svg";
 import cartIcon from "@assets/svg/cart-icon.svg";
-import styles from "./Header.module.css";
+import styles from "./NavBar.module.css";
 
-export default function Header() {
+export default function NavBar({ isAnimating = false }) {
   return (
     <header>
       <nav>
         <div className={styles.left}>
-          <div className={styles.logo}>
+          <div className={`${styles.logo} ${isAnimating ? styles.visible : ""}`}>
             <img src={logo} alt="logo" role="presentation" />
           </div>
           <div className={styles.links}>
@@ -33,3 +34,7 @@ export default function Header() {
     </header>
   );
 }
+
+NavBar.propTypes = {
+  isAnimating: PropTypes.bool,
+};

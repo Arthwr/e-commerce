@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import HeroTitle from "./HeroTitle";
+import HeroSection from "./HeroSection.jsx";
 
-describe("HeroTitle component", () => {
+describe("HeroSection component", () => {
   it("renders heading title and img", () => {
-    render(<HeroTitle />);
+    render(<HeroSection />);
 
     const logo = screen.getByAltText("tanoshi leaf logo");
     expect(screen.getByRole("heading", { name: "Tanoshi" })).toBeInTheDocument();

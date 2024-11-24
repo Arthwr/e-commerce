@@ -7,12 +7,14 @@ header {
 
 nav {
   display: flex;
+  min-height: 45px;
   justify-content: space-between;
   align-items: flex-end;
 }
 
 .links {
   display: flex;
+  transition: all 1.5s cubic-bezier(0.8, 0, 0.2, 1);
   gap: 1.5rem;
 }
 
@@ -41,13 +43,31 @@ nav {
 }
 
 .left {
+  position: relative;
   display: flex;
   align-items: flex-end;
   gap: 2rem;
 }
 
 .logo {
-  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: transform 1.5s cubic-bezier(0.8, 0, 0.2, 1), opacity 1s ease;
+  pointer-events: none;
+}
+
+.logo.visible {
+  transform: translateX(0);
+  opacity: 1;
+  transition: opacity 0.5s ease 0.8s;
+  pointer-events: auto;
+}
+
+.logo.visible + .links {
+  margin-left: calc(160px + 2rem);
 }
 
 .right {
