@@ -1,8 +1,19 @@
 header {
+  position: fixed;
+  max-width: inherit;
+  width: 100%;
+  z-index: 9999;
   font-family: "outfit extralight";
   font-size: 1.1875rem;
   color: var(--color-charcoal-grey);
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
+  background-color: white;
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+header.hidden {
+  transform: translateY(-100%);
 }
 
 nav {
