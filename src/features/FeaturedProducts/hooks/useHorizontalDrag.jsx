@@ -14,6 +14,7 @@ export default function useHorizontalDrag({
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
   const lastMoveTimeRef = useRef(0);
+  const lastTouchXRef = useRef(0);
 
   const stopMomentumAnimation = useCallback(() => {
     if (animationFrameRef.current) {
@@ -23,7 +24,19 @@ export default function useHorizontalDrag({
   }, []);
 
   const getClientX = useCallback((e) => {
-    return e.touches ? e.touches[0].clientX : e.pageX;
+    if (!e) return 0;
+
+    if (e.touches && e.touches.length > 0) {
+      const touchX = e.touches[0].clientX;
+      lastTouchXRef.current = touchX;
+      return touchX;
+    }
+
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      return e.changedTouches[0].clientX;
+    }
+
+    return e.pageX || e.clientX || lastTouchXRef.current || 0;
   }, []);
 
   useEffect(() => {
@@ -48,7 +61,8 @@ export default function useHorizontalDrag({
   const handleDragMove = useCallback(
     (e) => {
       if (!isDragging || !sliderRef.current) return;
-      e.preventDefault();
+
+      if (!e.touches) e.preventDefault();
 
       lastMoveTimeRef.current = Date.now();
 
@@ -110,7 +124,6 @@ export default function useHorizontalDrag({
     onMouseMove: isDragging ? handleDragMove : undefined,
     onMouseUp: handleDragMomentum,
     onMouseLeave: handleDragEnd,
-
     onTouchStart: handleDragStart,
     onTouchMove: isDragging ? handleDragMove : undefined,
     onTouchEnd: handleDragMomentum,

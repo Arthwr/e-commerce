@@ -25,7 +25,7 @@ export default function useAnimateScroll(animationDuration = 1000) {
   }, [animationDuration]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);

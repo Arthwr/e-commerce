@@ -12,7 +12,8 @@
   gap: 1rem;
   padding-bottom: 3rem;
   overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: pan-x pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 .slider::-webkit-scrollbar-track {

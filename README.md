@@ -8,5 +8,3 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Possible's to do:
-
--try to mimic react-elastic-carousel on featured products component: https://sag1v.github.io/react-elastic-carousel/
