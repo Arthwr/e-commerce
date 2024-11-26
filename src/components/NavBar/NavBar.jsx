@@ -6,7 +6,7 @@ import cartIcon from "@assets/svg/cart-icon.svg";
 import styles from "./NavBar.module.css";
 import { useEffect, useState } from "react";
 
-export default function NavBar({ isAnimating = false }) {
+export default function NavBar({ isAnimating = false, isStatic }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -25,13 +25,14 @@ export default function NavBar({ isAnimating = false }) {
   }, [prevScrollPos]);
 
   return (
-    <header className={`${visible ? "" : styles.hidden}`}>
+    <header className={`${visible ? "" : styles.hidden} ${isStatic ? styles.alt : ""}`}>
       <nav>
         <div className={styles.left}>
           <div className={`${styles.logo} ${isAnimating ? styles.visible : ""}`}>
             <img src={logo} alt="logo" role="presentation" />
           </div>
           <div className={styles.links}>
+            <Link to="/">Home</Link>
             <Link to="/products">Products</Link>
             <Link to="/about">About us</Link>
             <Link to="/sustainability">Sustainability</Link>
@@ -55,4 +56,5 @@ export default function NavBar({ isAnimating = false }) {
 
 NavBar.propTypes = {
   isAnimating: PropTypes.bool,
+  isStatic: PropTypes.bool,
 };

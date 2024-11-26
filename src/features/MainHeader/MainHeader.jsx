@@ -7,7 +7,7 @@ export default function MainHeader() {
 
   return (
     <>
-      <NavBar isAnimating={isAnimating} />
+      <NavBar isAnimating={isAnimating} isStatic={false} />
       <HeroSection isAnimating={isAnimating} />
     </>
   );

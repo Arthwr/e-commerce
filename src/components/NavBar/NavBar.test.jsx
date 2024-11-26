@@ -11,13 +11,14 @@ describe("NavBar component", () => {
       </MemoryRouter>
     );
 
-    const links = screen.getAllByRole("link", { name: /Products|About us|Sustainability|Cart/i, hidden: true });
+    const links = screen.getAllByRole("link", { name: /Home|Products|About us|Sustainability|Cart/i, hidden: true });
 
-    expect(links).toHaveLength(4);
-    expect(links[0]).toHaveAttribute("href", "/products");
-    expect(links[1]).toHaveAttribute("href", "/about");
-    expect(links[2]).toHaveAttribute("href", "/sustainability");
-    expect(links[3]).toHaveAttribute("href", "/cart");
+    expect(links).toHaveLength(5);
+    expect(links[0]).toHaveAttribute("href", "/");
+    expect(links[1]).toHaveAttribute("href", "/products");
+    expect(links[2]).toHaveAttribute("href", "/about");
+    expect(links[3]).toHaveAttribute("href", "/sustainability");
+    expect(links[4]).toHaveAttribute("href", "/cart");
   });
 
   it("renders img icons correctly", () => {
