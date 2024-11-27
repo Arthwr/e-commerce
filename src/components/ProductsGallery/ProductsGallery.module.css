@@ -1,0 +1,11 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-column-gap: 2rem;
+  grid-row-gap: 3rem;
+  padding: 2rem 0 6rem;
+}
+
+.wrapper > * {
+  flex: 0 0 auto;
+}

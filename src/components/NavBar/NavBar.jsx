@@ -6,11 +6,16 @@ import cartIcon from "@assets/svg/cart-icon.svg";
 import styles from "./NavBar.module.css";
 import { useEffect, useState } from "react";
 
-export default function NavBar({ isAnimating = false, isStatic }) {
+export default function NavBar({ isAnimating = false, isStatic = false, enableScrollHandler = true }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    if (!enableScrollHandler) {
+      setVisible(true);
+      return;
+    }
+
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
@@ -22,7 +27,7 @@ export default function NavBar({ isAnimating = false, isStatic }) {
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
+  }, [prevScrollPos, enableScrollHandler]);
 
   return (
     <header className={`${visible ? "" : styles.hidden} ${isStatic ? styles.alt : ""}`}>
@@ -57,4 +62,5 @@ export default function NavBar({ isAnimating = false, isStatic }) {
 NavBar.propTypes = {
   isAnimating: PropTypes.bool,
   isStatic: PropTypes.bool,
+  enableScrollHandler: PropTypes.bool,
 };
