@@ -10,11 +10,11 @@
 
 .filter select {
   color: var(--color-light-red);
-  min-width: 15ch;
+  min-width: 12ch;
   max-width: 30ch;
   border: 1px solid #777;
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
+  border-radius: 0.20em;
+  padding: 0.1em 0.25em;
   font-size: 1.25rem;
   cursor: pointer;
   line-height: 1.1;
