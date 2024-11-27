@@ -1,0 +1,32 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: "outfit extralight";
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-bottom: 200px;
+}
+
+.about img {
+  object-fit: cover;
+}
+
+.imgwrapper {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  max-width: 64rem;
+  align-items: baseline;
+}
+
+.content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

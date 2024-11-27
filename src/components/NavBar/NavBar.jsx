@@ -40,7 +40,6 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
             <Link to="/">Home</Link>
             <Link to="/products">Products</Link>
             <Link to="/about">About us</Link>
-            <Link to="/sustainability">Sustainability</Link>
           </div>
         </div>
         <div className={styles.right}>
