@@ -28,3 +28,8 @@
   width: 50px;
   height: 24px;
 }
+
+.pagebtn.active {
+  color: var(--color-white-smoke);
+  background-color: var(--color-charcoal);
+}

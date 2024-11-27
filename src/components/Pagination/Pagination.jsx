@@ -19,5 +19,5 @@ export default function Pagination({ pages = 4 }) {
 }
 
 Pagination.propTypes = {
-  pages: PropTypes.number.isRequired,
+  pages: PropTypes.number,
 };
