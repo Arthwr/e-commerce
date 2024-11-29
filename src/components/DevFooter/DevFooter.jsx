@@ -10,7 +10,6 @@ export default function DevFooter() {
         </a>
         <span>Designed & Developed by Arthur Utegenov</span>
       </div>
-      <div className={styles.copyright}>&copy; Copyright {new Date().getFullYear()}. All rights reserved</div>
     </section>
   );
 }

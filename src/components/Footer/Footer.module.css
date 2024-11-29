@@ -4,7 +4,7 @@
   color: var(--color-charcoal);
   width: 100%;
   display: flex;
-  padding: 2rem 3rem;
+  padding: 1rem 2rem;
   background-color: var(--color-columbia-blue);
   justify-content: space-between;
   align-items: center;
@@ -24,5 +24,6 @@
 .left,
 .right {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }

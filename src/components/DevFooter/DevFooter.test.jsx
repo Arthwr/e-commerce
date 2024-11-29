@@ -13,13 +13,4 @@ describe("DevFooter component", () => {
     const link = screen.getByRole("link", { name: "github profile" });
     expect(link).toHaveAttribute("href", "https://github.com/arthwr");
   });
-
-  it("displays the author name and copyright year", () => {
-    render(<DevFooter />);
-
-    expect(screen.getByText(/Designed & Developed by Arthur Utegenov/i)).toBeInTheDocument();
-
-    const currentYear = new Date().getFullYear();
-    expect(screen.getByText(new RegExp(`© Copyright ${currentYear}`))).toBeInTheDocument();
-  });
 });
