@@ -2,6 +2,7 @@ import Root from "./routes/Root.jsx";
 import Pages from "./routes/Pages.jsx";
 import ProductPage from "./routes/ProductPage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
+import CartPage from "./routes/CartPage.jsx";
 
 const routes = [
   {
@@ -19,6 +20,10 @@ const routes = [
       {
         path: "about",
         element: <AboutPage />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
       },
     ],
   },
