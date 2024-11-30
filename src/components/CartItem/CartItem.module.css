@@ -14,9 +14,14 @@
   gap: 1.5rem;
 }
 
-.item :not(:nth-child(1)) {
+.item :not(:first-child):not(:last-child) {
   margin: 0 auto;
   max-width: fit-content;
+}
+
+.item :last-child {
+  justify-self: flex-end;
+  margin-right: 1.25rem;
 }
 
 .placeholder {

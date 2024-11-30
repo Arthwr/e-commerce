@@ -24,8 +24,7 @@
 
 .cart-wrapper {
   width: 100%;
-  padding-left: 1.5rem;
-  padding-bottom: 5rem;
+  padding: 0 1.5rem 5rem 1.5rem;
 }
 
 .summary {
@@ -53,4 +52,38 @@
 .head :not(:nth-child(1)) {
   margin: 0 auto;
   max-width: fit-content;
+}
+
+.checkout-group {
+  font-family: "outfit light";
+  font-weight: 400;
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 3rem;
+}
+
+.total-wrapper {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.total-label {
+  font-size: 1rem;
+}
+
+.total-price {
+  font-size: 2.125rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.return:hover {
+  text-decoration: underline;
 }
