@@ -1,0 +1,23 @@
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 5rem;
+}
+
+.counter > * {
+  flex: 1 0 auto;
+}
+
+.counter > input {
+  flex-basis: 50%;
+}
+
+.counter > button {
+  flex-basis: 25%;
+}
+
+.counter input[type="number"] {
+  text-align: center;
+  min-width: 0;
+}

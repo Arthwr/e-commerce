@@ -1,4 +1,5 @@
 .default {
+  width: fit-content;
   font-family: "outfit regular";
   font-size: 1.25rem;
   border-radius: 0.5rem;

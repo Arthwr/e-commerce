@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./CartItem.module.css";
+import ProductCounter from "@components/ProductCounter/ProductCounter.jsx";
 
 export default function CartItem({ name, id, price, quantity, total, imgSrc }) {
   return (
@@ -12,7 +13,9 @@ export default function CartItem({ name, id, price, quantity, total, imgSrc }) {
         </div>
       </div>
       <div>{`${price} $`}</div>
-      <div>{quantity}</div>
+      <div>
+        <ProductCounter quantity={quantity} />
+      </div>
       <div>{`${total} $`}</div>
       <div>
         <button>Remove</button>

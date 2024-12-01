@@ -14,7 +14,6 @@
   gap: 1rem;
 }
 
-
 .info > div {
   display: flex;
   flex-direction: column;
@@ -29,7 +28,6 @@
   gap: 2rem;
   max-width: 60ch;
 }
-
 
 .right h1 {
   font-family: "outfit regular";
@@ -53,4 +51,17 @@
   width: 575px;
   height: 360px;
   background-color: #d9d9d9;
+}
+
+.actions {
+  font-family: "outfit extralight";
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.actions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

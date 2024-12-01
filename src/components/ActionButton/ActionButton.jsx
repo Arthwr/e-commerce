@@ -4,9 +4,11 @@ import styles from "./ActionButton.module.css";
 
 export default function ActionButton({ path, label, ariaLabel }) {
   return (
-    <Link className={styles.default} to={path} aria-label={ariaLabel || label}>
-      {label}
-    </Link>
+    <div className={styles.default}>
+      <Link  to={path} aria-label={ariaLabel || label}>
+        {label}
+      </Link>
+    </div>
   );
 }
 

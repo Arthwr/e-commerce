@@ -2,6 +2,7 @@ import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs";
 import styles from "./SingleProduct.module.css";
 import PropTypes from "prop-types";
 import ActionButton from "@components/ActionButton/ActionButton";
+import ProductCounter from "@components/ProductCounter/ProductCounter";
 
 export default function SingleProduct({ imgSrc }) {
   return (
@@ -24,6 +25,10 @@ export default function SingleProduct({ imgSrc }) {
             </p>
           </div>
           <div className={styles.actions}>
+            <div>
+              <span>Quantity:</span>
+              <ProductCounter />
+            </div>
             <ActionButton path="/cart" label="Add to cart" />
           </div>
         </div>
