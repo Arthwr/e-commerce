@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./ProductCard.module.css";
 import starIcon from "@assets/svg/star-rating.svg";
@@ -9,6 +10,7 @@ export default function ProductCard({
     price: 149,
     description: "All-day comfort, supportive, durable",
     rating: 5,
+    id: "c4gsAfr",
   },
 }) {
   const { name, price, description, rating } = product;
@@ -20,7 +22,9 @@ export default function ProductCard({
       </div>
       <div className={styles.info}>
         <div className={styles.text}>
-          <span>{name}</span>
+          <span>
+            <Link to={`/products/${product.id}`}>{name}</Link>
+          </span>
           <span>{price} $</span>
           <span className={styles.description}>{description}</span>
         </div>
@@ -45,5 +49,6 @@ ProductCard.propTypes = {
     price: PropTypes.number,
     description: PropTypes.string,
     rating: PropTypes.number,
+    id: PropTypes.string,
   }),
 };

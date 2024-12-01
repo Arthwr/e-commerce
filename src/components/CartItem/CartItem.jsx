@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./CartItem.module.css";
 
-export default function CartItem({ name, price, quantity, total, imgSrc }) {
+export default function CartItem({ name, id, price, quantity, total, imgSrc }) {
   return (
     <div className={styles.item}>
       <div className={styles["item-info"]}>
         {imgSrc ? <img src={imgSrc} alt="" width={140} /> : <div className={styles.placeholder}></div>}
-        <div>{name}</div>
+        <div>
+          <Link to={`/products/${id}`}>{name}</Link>
+        </div>
       </div>
       <div>{`${price} $`}</div>
       <div>{quantity}</div>
@@ -20,6 +23,7 @@ export default function CartItem({ name, price, quantity, total, imgSrc }) {
 
 CartItem.propTypes = {
   name: PropTypes.string,
+  id: PropTypes.string,
   price: PropTypes.number,
   quantity: PropTypes.number,
   total: PropTypes.number,

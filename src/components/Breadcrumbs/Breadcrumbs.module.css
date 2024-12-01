@@ -1,0 +1,18 @@
+.breadcrumbs {
+  font-family: "outfit light";
+  display: flex;
+  text-transform: uppercase;
+  gap: 0.5rem;
+}
+
+.breadcrumbs li:not(:last-child) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  display: inline-block;
+  content: "/";
+  padding-left: 0.5rem;
+  text-decoration: none;
+}

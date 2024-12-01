@@ -19,9 +19,9 @@ export default function Cart() {
             <div className={styles.label}>Quantity</div>
             <div className={styles.label}>Total</div>
           </div>
-          <CartItem name="Product A" price={100} quantity={2} total={200} />
-          <CartItem name="Product B" price={2000} quantity={4} total={8000} />
-          <CartItem name="Product C" price={349} quantity={1} total={349} />
+          <CartItem name="Product A" id="cFasLs4" price={100} quantity={2} total={200} />
+          <CartItem name="Product B" id="asQefr5" price={2000} quantity={4} total={8000} />
+          <CartItem name="Product C" id="asQwer1" price={349} quantity={1} total={349} />
         </div>
         <div className={styles["checkout-group"]}>
           <div className={styles["total-wrapper"]}>
@@ -30,7 +30,7 @@ export default function Cart() {
           </div>
           <div className={styles.actions}>
             <ActionButton path="/checkout" label="Checkout" ariaLabel="confirm purchase" />
-            <Link to="/" className={styles.return}>
+            <Link to="/products" className={styles.return}>
               Keep shopping
             </Link>
           </div>

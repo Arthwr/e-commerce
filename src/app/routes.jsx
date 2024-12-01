@@ -1,8 +1,9 @@
 import Root from "./routes/Root.jsx";
 import Pages from "./routes/Pages.jsx";
-import ProductPage from "./routes/ProductPage.jsx";
+import ProductsPage from "./routes/ProductsPage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
 import CartPage from "./routes/CartPage.jsx";
+import SingleProductPage from "./routes/SingleProductPage.jsx";
 
 const routes = [
   {
@@ -15,7 +16,11 @@ const routes = [
     children: [
       {
         path: "products",
-        element: <ProductPage />,
+        element: <ProductsPage />,
+      },
+      {
+        path: "products/:productid",
+        element: <SingleProductPage />,
       },
       {
         path: "about",
