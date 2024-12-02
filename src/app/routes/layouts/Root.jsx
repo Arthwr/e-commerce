@@ -1,7 +1,7 @@
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "@components/Footer/Footer.jsx";
 import NavBar from "@components/NavBar/NavBar";
 import MainHeader from "@features/MainHeader/MainHeader";
-import { Outlet, useLocation } from "react-router-dom";
 
 export default function Root() {
   const location = useLocation();

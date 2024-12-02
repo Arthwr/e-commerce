@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { MemoryRouter } from "react-router-dom";
 import ProductCard from "./ProductCard.jsx";
 
 describe("Product card component", () => {
@@ -11,7 +12,11 @@ describe("Product card component", () => {
   };
 
   it("render product card details and text correctly", () => {
-    render(<ProductCard product={mockProduct} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={mockProduct} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText(mockProduct.name)).toBeInTheDocument();
     expect(screen.getByText(`${mockProduct.price} $`)).toBeInTheDocument();
@@ -19,7 +24,11 @@ describe("Product card component", () => {
   });
 
   it("renders correct number of filled stars", () => {
-    render(<ProductCard product={mockProduct} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={mockProduct} />
+      </MemoryRouter>
+    );
 
     const filledStars = screen.getAllByAltText("star rating icon").filter((star) => star.className.includes("filled"));
     expect(filledStars).toHaveLength(mockProduct.rating);
