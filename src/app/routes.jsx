@@ -1,19 +1,19 @@
-import Root from "./routes/Root.jsx";
-import Pages from "./routes/Pages.jsx";
-import ProductsPage from "./routes/ProductsPage.jsx";
-import AboutPage from "./routes/AboutPage.jsx";
-import CartPage from "./routes/CartPage.jsx";
-import SingleProductPage from "./routes/SingleProductPage.jsx";
+import Root from "./routes/layouts/Root.jsx";
+import MainPage from "./routes/pages/MainPage.jsx";
+import ProductsPage from "./routes/pages/ProductsPage.jsx";
+import AboutPage from "./routes/pages/AboutPage.jsx";
+import CartPage from "./routes/pages/CartPage.jsx";
+import SingleProductPage from "./routes/pages/SingleProductPage.jsx";
 
 const routes = [
   {
     path: "/",
     element: <Root />,
-  },
-  {
-    path: "/",
-    element: <Pages />,
     children: [
+      {
+        path: "",
+        element: <MainPage />,
+      },
       {
         path: "products",
         element: <ProductsPage />,
