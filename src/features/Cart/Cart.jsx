@@ -1,10 +1,13 @@
-import CartItem from "@components/CartItem/CartItem";
-import styles from "./Cart.module.css";
-import img from "@assets/images/cart-topbg.webp";
-import ActionButton from "@components/ActionButton/ActionButton";
 import { Link } from "react-router-dom";
+import { useCart } from "@contexts/CartContext.jsx";
+import CartItem from "@components/CartItem/CartItem.jsx";
+import ActionButton from "@components/ActionButton/ActionButton.jsx";
+import img from "@assets/images/cart-topbg.webp";
+import styles from "./Cart.module.css";
 
 export default function Cart() {
+  const { cartItems, getTotalCartPrice } = useCart();
+
   return (
     <section className={styles.cart}>
       <div className={styles.banner}>
@@ -19,14 +22,14 @@ export default function Cart() {
             <div className={styles.label}>Quantity</div>
             <div className={styles.label}>Total</div>
           </div>
-          <CartItem name="Product A" id="cFasLs4" price={100} quantity={2} total={200} />
-          <CartItem name="Product B" id="asQefr5" price={2000} quantity={4} total={8000} />
-          <CartItem name="Product C" id="asQwer1" price={349} quantity={1} total={349} />
+          {cartItems.map((item) => (
+            <CartItem key={item.id} {...item} />
+          ))}
         </div>
         <div className={styles["checkout-group"]}>
           <div className={styles["total-wrapper"]}>
             <div className={styles["total-label"]}>Subtotal:</div>
-            <span className={styles["total-price"]}>8549 $</span>
+            <span className={styles["total-price"]}>{`${getTotalCartPrice()} $`}</span>
           </div>
           <div className={styles.actions}>
             <ActionButton path="/checkout" label="Checkout" ariaLabel="confirm purchase" />

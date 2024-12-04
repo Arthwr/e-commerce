@@ -4,7 +4,8 @@
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@features/*": ["src/features/*"]
+      "@features/*": ["src/features/*"],
+      "@contexts/*": ["src/app/contexts/*"]
     }
   }
 }

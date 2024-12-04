@@ -1,35 +1,49 @@
-import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs";
-import styles from "./SingleProduct.module.css";
 import PropTypes from "prop-types";
-import ActionButton from "@components/ActionButton/ActionButton";
-import ProductCounter from "@components/ProductCounter/ProductCounter";
+import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.jsx";
+import ProductCounter from "@components/ProductCounter/ProductCounter.jsx";
+import styles from "./SingleProduct.module.css";
+import { useState } from "react";
+import { useCart } from "@contexts/CartContext";
 
-export default function SingleProduct({ imgSrc }) {
+export default function SingleProduct(product) {
+  const foo = `The frame's design was inspired by classic silhouettes and the acetate styles of Old Hollywood. It's subtle cat eye shape, precious metal plating and precious metal lenses reflect the sophisticated lifestyles of Runyon Canyon's residents.`;
+
+  const mockProduct = {
+    name: "Model 003 Pink & White",
+    id: "asQeRa",
+    price: 249,
+    description: foo,
+  };
+
+  const renderedProduct = product?.id ? product : mockProduct;
+  const { name, price, description, imgSrc } = renderedProduct;
+
+  const { addToCart } = useCart();
+  const [productCount, setProductCount] = useState(1);
+
   return (
     <section className={styles["single-section"]}>
-      <Breadcrumbs label="Model 001 Black & White" />
+      <Breadcrumbs label={name} />
       <div className={styles.product}>
         <div className={styles.left}>
-          {imgSrc ? <img src={imgSrc} alt="" width={575} /> : <div className={styles.placeholder}></div>}
+          {imgSrc ? <img src={imgSrc} alt={name} width={575} /> : <div className={styles.placeholder}></div>}
         </div>
         <div className={styles.right}>
           <div className={styles.info}>
             <div>
-              <h1>Model 001 Black & White</h1>
-              <div className={styles.price}>149 $</div>
+              <h1>{name}</h1>
+              <div className={styles.price}>{`${price} $`}</div>
             </div>
-            <p>
-              The frame&apos;s design was inspired by classic silhouettes and the acetate styles of Old Hollywood. Its
-              subtle cat eye shape, precious metal plating and precious metal lenses reflect the sophisticated
-              lifestyles of Runyon Canyon&apos;s residents.
-            </p>
+            <p>{description}</p>
           </div>
           <div className={styles.actions}>
             <div>
               <span>Quantity:</span>
-              <ProductCounter />
+              <ProductCounter count={productCount} onChange={setProductCount} />
             </div>
-            <ActionButton path="/cart" label="Add to cart" />
+            <button className={styles.btn} onClick={() => addToCart(renderedProduct, productCount)}>
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -38,5 +52,10 @@ export default function SingleProduct({ imgSrc }) {
 }
 
 SingleProduct.propTypes = {
-  imgSrc: PropTypes.string,
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    imgSrc: PropTypes.string,
+  }),
 };
