@@ -1,9 +1,11 @@
+import { useProduct } from "@contexts/ProductContext.jsx";
 import useHorizontalDrag from "./hooks/useHorizontalDrag.jsx";
 import SegmentHeader from "@components/SegmentHeader/SegmentHeader.jsx";
 import ProductCard from "@components/ProductCard/ProductCard.jsx";
 import styles from "./FeaturedProducts.module.css";
 
 export default function FeaturedProducts() {
+  const { products } = useProduct();
   const { sliderRef, isDragging, dragProps } = useHorizontalDrag({
     sensitivity: 1.5,
     momentumMultiplier: 0.08,
@@ -16,8 +18,8 @@ export default function FeaturedProducts() {
     <section className={styles.featured}>
       <SegmentHeader label="Explore today" />
       <div ref={sliderRef} {...dragProps} className={`${styles.slider} ${isDragging ? styles.grabbing : ""}`}>
-        {Array.from({ length: 8 }).map((_, index) => (
-          <ProductCard key={index} />
+        {Array.from(products).map((product) => (
+          <ProductCard key={product.id} {...product} />
         ))}
       </div>
     </section>

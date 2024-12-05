@@ -1,54 +1,62 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./ProductCard.module.css";
 import starIcon from "@assets/svg/star-rating.svg";
-import placeholder from "@assets/svg/img-placeholder.svg";
 
-export default function ProductCard({
-  product = {
-    name: "Model 001 Black & White",
-    price: 149,
-    description: "All-day comfort, supportive, durable",
-    rating: 5,
-    id: "c4gsAfr",
-  },
-}) {
-  const { name, price, description, rating } = product;
+export default function ProductCard({ id, title, price, description, rating, images }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   return (
     <div className={styles.card}>
       <div className={styles["product-img"]}>
-        <img src={placeholder} alt="placeholder image" width={320} height={400} draggable="false" />
+        {!imageLoaded && <div className={styles.loader}></div>}
+        <img
+          src={images[0]}
+          alt={`${title} image`}
+          width={320}
+          height={400}
+          loading="lazy"
+          draggable="false"
+          onLoad={handleImageLoad}
+        />
       </div>
       <div className={styles.info}>
         <div className={styles.text}>
-          <span>
-            <Link to={`/products/${product.id}`}>{name}</Link>
+          <span className={styles.title}>
+            <Link to={`/products/${id}`}>{title}</Link>
           </span>
-          <span>{price} $</span>
+          <span className={styles.price}>{price} $</span>
           <span className={styles.description}>{description}</span>
         </div>
-        <div className={styles.rating} aria-label={`rating ${rating} stars`}>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <img
-              key={index}
-              src={starIcon}
-              alt="star rating icon"
-              className={index < rating ? styles.filled : styles.empty}
-            />
-          ))}
-        </div>
+      </div>
+      <div className={styles.rating} aria-label={`Rating: ${rating} stars`}>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <img
+            key={index}
+            src={starIcon}
+            alt={`${index + 1} star`}
+            className={index < Math.floor(rating) ? styles.filled : ""}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
 ProductCard.propTypes = {
-  product: PropTypes.shape({
-    name: PropTypes.string,
-    price: PropTypes.number,
-    description: PropTypes.string,
-    rating: PropTypes.number,
-    id: PropTypes.string,
-  }),
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+ProductCard.defaultProps = {
+  rating: 0,
+  images: [],
 };

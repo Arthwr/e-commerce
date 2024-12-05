@@ -1,18 +1,22 @@
+import { CartProvider } from "./contexts/CartContext.jsx";
+import { ProductProvider } from "@contexts/ProductContext.jsx";
 import Root from "./routes/layouts/Root.jsx";
 import MainPage from "./routes/pages/MainPage.jsx";
 import ProductsPage from "./routes/pages/ProductsPage.jsx";
 import AboutPage from "./routes/pages/AboutPage.jsx";
 import CartPage from "./routes/pages/CartPage.jsx";
 import SingleProductPage from "./routes/pages/SingleProductPage.jsx";
-import { CartProvider } from "./contexts/CartContext.jsx";
+
 
 const routes = [
   {
     path: "/",
     element: (
-      <CartProvider>
-        <Root />
-      </CartProvider>
+      <ProductProvider>
+        <CartProvider>
+          <Root />
+        </CartProvider>
+      </ProductProvider>
     ),
     children: [
       {

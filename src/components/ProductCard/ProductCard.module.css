@@ -1,20 +1,39 @@
 .card {
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
+  max-width: 20rem;
   gap: 1rem;
 }
 
+.product-img {
+  contain: layout;
+  position: relative;
+  width: 320px;
+  height: 400px;
+  aspect-ratio: 320/400;
+  background-color: #f0f0f0;
+  content-visibility: auto;
+}
+
 .product-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 0.5rem;
 }
 
 .rating {
   display: flex;
   gap: 5px;
+  margin-top: auto;
 }
 
 .info {
   display: flex;
+  color: var(--color-charcoal);
   gap: 1rem;
   flex-direction: column;
 }
@@ -22,10 +41,49 @@
 .description {
   font-family: "outfit light";
   color: var(--color-charcoal-grey);
+  margin-top: 1rem;
+}
+
+.filled {
+  filter: brightness(0) saturate(100%) invert(78%) sepia(36%) saturate(5875%) hue-rotate(359deg) brightness(103%)
+    contrast(107%);
 }
 
 .text {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.title {
+  font-size: 1.15rem;
+}
+
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loader {
+  will-change: background-position;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
 }
