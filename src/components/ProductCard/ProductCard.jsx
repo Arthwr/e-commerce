@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "./ProductCard.module.css";
 import starIcon from "@assets/svg/star-rating.svg";
 
-export default function ProductCard({ id, title, price, description, rating, images }) {
+export default function ProductCard({ id, title, price, description, rating = 0, images = [] }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -54,9 +54,4 @@ ProductCard.propTypes = {
   description: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
-ProductCard.defaultProps = {
-  rating: 0,
-  images: [],
 };

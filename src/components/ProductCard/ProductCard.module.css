@@ -1,7 +1,5 @@
 .card {
   display: flex;
-  height: 100%;
-  width: 100%;
   flex-direction: column;
   max-width: 20rem;
   gap: 1rem;
@@ -15,6 +13,7 @@
   aspect-ratio: 320/400;
   background-color: #f0f0f0;
   content-visibility: auto;
+  overflow: hidden;
 }
 
 .product-img img {

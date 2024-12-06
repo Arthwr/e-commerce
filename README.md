@@ -8,3 +8,5 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Possible's to do:
+
+1. fix layout shift with images in featured products carousel & products gallery

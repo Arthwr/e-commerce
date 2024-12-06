@@ -6,7 +6,7 @@ header {
   font-family: "outfit extralight";
   font-size: 1.1875rem;
   color: var(--color-charcoal-grey);
-  padding: 1rem 1rem;
+  padding: 1rem 2rem;
   background-color: white;
   transform: translateY(0);
   transition: transform 0.3s ease-in-out;
