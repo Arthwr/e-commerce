@@ -7,6 +7,7 @@ import styles from "./Cart.module.css";
 
 export default function Cart() {
   const { cartItems, getTotalCartPrice } = useCart();
+  console.log(cartItems);
 
   return (
     <section className={styles.cart}>
@@ -23,7 +24,7 @@ export default function Cart() {
             <div className={styles.label}>Total</div>
           </div>
           {cartItems.map((item) => (
-            <CartItem key={item.id} {...item} />
+            <CartItem key={item.sku} {...item} />
           ))}
         </div>
         <div className={styles["checkout-group"]}>

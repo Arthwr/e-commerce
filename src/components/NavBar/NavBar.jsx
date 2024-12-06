@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useCart } from "@contexts/CartContext.jsx";
 import PropTypes from "prop-types";
 import logo from "@assets/svg/main-logo.svg";
 import searchIcon from "@assets/svg/search-icon.svg";
 import cartIcon from "@assets/svg/cart-icon.svg";
 import styles from "./NavBar.module.css";
-import { useEffect, useState } from "react";
 
 export default function NavBar({ isAnimating = false, isStatic = false, enableScrollHandler = true }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const { cartItems } = useCart();
 
   useEffect(() => {
     if (!enableScrollHandler) {
@@ -50,7 +52,7 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
           <Link to="/cart">
             <img src={cartIcon} alt="" role="presentation" />
             <span>Cart</span>
-            <div className={styles.counter}>14</div>
+            <div className={styles.counter}>{cartItems.length || 0}</div>
           </Link>
         </div>
       </nav>

@@ -5,34 +5,38 @@ import styles from "./CartItem.module.css";
 import ProductCounter from "@components/ProductCounter/ProductCounter.jsx";
 
 export default function CartItem(props) {
-  const { name, id, price, quantity, imgSrc } = props;
+  const { title, sku, price, quantity, images } = props;
   const { removeFromCart, updateQuantity } = useCart();
-  const total = price * quantity;
+  const total = (price * quantity).toFixed(2);
 
   return (
     <div className={styles.item}>
       <div className={styles["item-info"]}>
-        {imgSrc ? <img src={imgSrc} alt={`${name}`} width={140} /> : <div className={styles.placeholder}></div>}
+        {images[0] ? (
+          <img src={images[0]} alt={`${title}`} width={140} height={140} />
+        ) : (
+          <div className={styles.placeholder}></div>
+        )}
         <div>
-          <Link to={`/products/${id}`}>{name}</Link>
+          <Link to={`/products/${sku}`}>{title}</Link>
         </div>
       </div>
       <div>{`${price} $`}</div>
       <div>
-        <ProductCounter count={quantity} onChange={(newCount) => updateQuantity(id, newCount)} />
+        <ProductCounter count={quantity} onChange={(newCount) => updateQuantity(sku, newCount)} />
       </div>
       <div>{`${total} $`}</div>
       <div>
-        <button onClick={() => removeFromCart(id)}>Remove</button>
+        <button onClick={() => removeFromCart(sku)}>Remove</button>
       </div>
     </div>
   );
 }
 
 CartItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  sku: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
-  imgSrc: PropTypes.string,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

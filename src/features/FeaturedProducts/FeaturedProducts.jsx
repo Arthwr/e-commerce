@@ -19,7 +19,7 @@ export default function FeaturedProducts() {
       <SegmentHeader label="Explore today" />
       <div ref={sliderRef} {...dragProps} className={`${styles.slider} ${isDragging ? styles.grabbing : ""}`}>
         {Array.from(products).map((product) => (
-          <ProductCard key={product.id} {...product} />
+          <ProductCard key={product.sku} {...product} />
         ))}
       </div>
     </section>

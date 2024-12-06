@@ -1,37 +1,35 @@
+import { useState } from "react";
+import { useCart } from "@contexts/CartContext.jsx";
+import { useParams } from "react-router-dom";
+import { useProduct } from "@contexts/ProductContext.jsx";
 import PropTypes from "prop-types";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.jsx";
 import ProductCounter from "@components/ProductCounter/ProductCounter.jsx";
 import styles from "./SingleProduct.module.css";
-import { useState } from "react";
-import { useCart } from "@contexts/CartContext";
 
-export default function SingleProduct(product) {
-  const foo = `The frame's design was inspired by classic silhouettes and the acetate styles of Old Hollywood. It's subtle cat eye shape, precious metal plating and precious metal lenses reflect the sophisticated lifestyles of Runyon Canyon's residents.`;
-
-  const mockProduct = {
-    name: "Model 003 Pink & White",
-    id: "asQeRa",
-    price: 249,
-    description: foo,
-  };
-
-  const renderedProduct = product?.id ? product : mockProduct;
-  const { name, price, description, imgSrc } = renderedProduct;
-
-  const { addToCart } = useCart();
+export default function SingleProduct() {
   const [productCount, setProductCount] = useState(1);
+  const { addToCart } = useCart();
+  const { productId } = useParams();
+  const { products } = useProduct();
+  const product = products.find((item) => item.sku === productId);
+  const { title, price, description, images } = product;
 
   return (
     <section className={styles["single-section"]}>
-      <Breadcrumbs label={name} />
+      <Breadcrumbs label={title} />
       <div className={styles.product}>
         <div className={styles.left}>
-          {imgSrc ? <img src={imgSrc} alt={name} width={575} /> : <div className={styles.placeholder}></div>}
+          {images[0] ? (
+            <img src={images[0]} alt={title} width={575} height={575} />
+          ) : (
+            <div className={styles.placeholder}></div>
+          )}
         </div>
         <div className={styles.right}>
           <div className={styles.info}>
             <div>
-              <h1>{name}</h1>
+              <h1>{title}</h1>
               <div className={styles.price}>{`${price} $`}</div>
             </div>
             <p>{description}</p>
@@ -41,7 +39,7 @@ export default function SingleProduct(product) {
               <span>Quantity:</span>
               <ProductCounter count={productCount} onChange={setProductCount} />
             </div>
-            <button className={styles.btn} onClick={() => addToCart(renderedProduct, productCount)}>
+            <button className={styles.btn} onClick={() => addToCart(product, productCount)}>
               Add to cart
             </button>
           </div>

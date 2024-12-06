@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "./ProductCard.module.css";
 import starIcon from "@assets/svg/star-rating.svg";
 
-export default function ProductCard({ id, title, price, description, rating = 0, images = [] }) {
+export default function ProductCard({ sku, title, price, description, rating = 0, images = [] }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -27,7 +27,7 @@ export default function ProductCard({ id, title, price, description, rating = 0,
       <div className={styles.info}>
         <div className={styles.text}>
           <span className={styles.title}>
-            <Link to={`/products/${id}`}>{title}</Link>
+            <Link to={`/products/${sku}`}>{title}</Link>
           </span>
           <span className={styles.price}>{price} $</span>
           <span className={styles.description}>{description}</span>
@@ -48,7 +48,7 @@ export default function ProductCard({ id, title, price, description, rating = 0,
 }
 
 ProductCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  sku: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,

@@ -28,7 +28,7 @@ const routes = [
         element: <ProductsPage />,
       },
       {
-        path: "products/:productid",
+        path: "products/:productId",
         element: <SingleProductPage />,
       },
       {

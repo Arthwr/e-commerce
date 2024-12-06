@@ -22,6 +22,15 @@
   padding-bottom: 0.5rem;
 }
 
+.left {
+  max-width: 575px;
+  max-height: 575px;
+}
+
+.left img {
+  object-fit: contain;
+}
+
 .right {
   display: flex;
   flex-direction: column;

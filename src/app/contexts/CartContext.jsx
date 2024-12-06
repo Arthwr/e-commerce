@@ -4,14 +4,11 @@ import { createContext, useCallback, useContext, useMemo, useState } from "react
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([
-    { name: "Product A", id: "cFaQer", price: 149, quantity: 2 },
-    { name: "Product B", id: "xDasQw", price: 499, quantity: 1 },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = useCallback((newItem, quantity) => {
     setCartItems((prevItems) => {
-      const existingItemIndex = prevItems.findIndex((item) => item.id === newItem.id);
+      const existingItemIndex = prevItems.findIndex((item) => item.sku === newItem.sku);
 
       if (existingItemIndex !== -1) {
         const updatedItems = [...prevItems];
@@ -27,7 +24,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const removeFromCart = useCallback((itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+    setCartItems((prevItems) => prevItems.filter((item) => item.sku !== itemId));
   }, []);
 
   const updateQuantity = useCallback(
@@ -36,14 +33,14 @@ export const CartProvider = ({ children }) => {
         return removeFromCart(itemId);
       }
       setCartItems((prevItems) =>
-        prevItems.map((item) => (item.id === itemId ? { ...item, quantity: newQuantity } : item))
+        prevItems.map((item) => (item.sku === itemId ? { ...item, quantity: newQuantity } : item))
       );
     },
     [removeFromCart]
   );
 
   const getTotalCartPrice = useCallback(() => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   }, [cartItems]);
 
   const contextValue = useMemo(

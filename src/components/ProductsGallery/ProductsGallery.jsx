@@ -7,8 +7,8 @@ export default function ProductsGallery() {
 
   return (
     <div className={styles.wrapper}>
-      {Array.from(products).map((product) => (
-        <ProductCard key={product.id} {...product} />
+      {products.map((product) => (
+        <ProductCard key={product.sku} {...product} />
       ))}
     </div>
   );
