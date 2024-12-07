@@ -6,6 +6,8 @@
 }
 
 .slider {
+  will-change: transform;
+  transition: transform 0.1 ease-out;
   cursor: default;
   display: flex;
   flex-wrap: nowrap;

@@ -8,6 +8,7 @@ export default function useHorizontalDrag({
   momentumTimeout = 10,
 } = {}) {
   const [isDragging, setIsDragging] = useState(false);
+  const [isVisible, setIsVisible] = useState(document.visibilityState === "visible");
   const sliderRef = useRef(null);
   const animationFrameRef = useRef(null);
   const startXRef = useRef(0);
@@ -45,21 +46,21 @@ export default function useHorizontalDrag({
       let initialVelocity = velocity * momentumMultiplier;
 
       const animateMomentum = () => {
+        if (!sliderRef.current) return;
+
         if (Math.abs(initialVelocity) < minimumVelocity) {
           return;
         }
 
         initialVelocity *= friction;
 
-        if (sliderRef.current) {
-          const newScrollLeft = sliderRef.current.scrollLeft - initialVelocity;
+        const newScrollLeft = sliderRef.current.scrollLeft - initialVelocity;
 
-          if (newScrollLeft <= 0 || newScrollLeft >= sliderRef.current.scrollWidth - sliderRef.current.clientWidth) {
-            return;
-          }
-
-          sliderRef.current.scrollLeft = newScrollLeft;
+        if (newScrollLeft <= 0 || newScrollLeft >= sliderRef.current.scrollWidth - sliderRef.current.clientWidth) {
+          return;
         }
+
+        sliderRef.current.scrollLeft = newScrollLeft;
 
         if (Math.abs(initialVelocity) >= minimumVelocity) {
           animationFrameRef.current = requestAnimationFrame(animateMomentum);
@@ -80,10 +81,6 @@ export default function useHorizontalDrag({
     }
   }, []);
 
-  useEffect(() => {
-    return () => stopMomentumAnimation();
-  }, [stopMomentumAnimation]);
-
   const handleDragStart = useCallback(
     (e) => {
       stopMomentumAnimation();
@@ -100,7 +97,7 @@ export default function useHorizontalDrag({
 
   const handleDragMove = useCallback(
     (e) => {
-      if (!isDragging || !sliderRef.current) return;
+      if (!isDragging || !sliderRef.current || !isVisible) return;
 
       if (!e.touches) e.preventDefault();
 
@@ -109,12 +106,33 @@ export default function useHorizontalDrag({
       const walk = (x - startXRef.current) * sensitivity;
       sliderRef.current.scrollLeft = scrollLeftRef.current - walk;
     },
-    [isDragging, sensitivity, getClientX]
+    [isDragging, sensitivity, getClientX, isVisible]
   );
 
   const handleDragEnd = useCallback(() => {
     setIsDragging(false);
   }, []);
+
+  useEffect(() => {
+    return () => stopMomentumAnimation();
+  }, [stopMomentumAnimation]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(document.visibilityState === "visible");
+
+      if (document.visibilityState === "hidden") {
+        stopMomentumAnimation();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stopMomentumAnimation();
+    };
+  }, [stopMomentumAnimation]);
 
   const dragProps = {
     onMouseDown: handleDragStart,
