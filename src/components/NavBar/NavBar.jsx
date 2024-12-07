@@ -46,13 +46,13 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
         </div>
         <div className={styles.right}>
           <button>
-            <img src={searchIcon} alt="" role="presentation" />
+            <img src={searchIcon} alt="search icon" role="presentation" />
             <span>Search</span>
           </button>
           <Link to="/cart">
             <img src={cartIcon} alt="" role="presentation" />
             <span>Cart</span>
-            <div className={styles.counter}>{cartItems.length || 0}</div>
+            <div className={styles.counter}>{cartItems?.length || 0}</div>
           </Link>
         </div>
       </nav>

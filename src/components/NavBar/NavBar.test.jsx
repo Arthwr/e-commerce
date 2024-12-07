@@ -1,9 +1,40 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { useCart } from "@contexts/CartContext.jsx";
 import NavBar from "./NavBar.jsx";
 
+vi.mock("@contexts/CartContext.jsx", () => ({
+  useCart: vi.fn(),
+}));
+
 describe("NavBar component", () => {
+  it("renders cart counter correctly with mocked cart items", () => {
+    useCart.mockReturnValue({ cartItems: [{ id: 1 }, { id: 2 }] });
+
+    render(
+      <MemoryRouter>
+        <NavBar />
+      </MemoryRouter>
+    );
+
+    const cartCounter = screen.getByText("2");
+    expect(cartCounter).toBeInTheDocument();
+  });
+
+  it("renders empty cart counter when no items in cart", () => {
+    useCart.mockReturnValue({ cartItems: [] });
+
+    render(
+      <MemoryRouter>
+        <NavBar />
+      </MemoryRouter>
+    );
+
+    const cartCounter = screen.getByText("0");
+    expect(cartCounter).toBeInTheDocument();
+  });
+
   it("renders inner links correctly", () => {
     render(
       <MemoryRouter>
