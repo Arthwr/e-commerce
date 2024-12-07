@@ -6,19 +6,13 @@ import styles from "./FeaturedProducts.module.css";
 
 export default function FeaturedProducts() {
   const { products } = useProduct();
-  const { sliderRef, isDragging, dragProps } = useHorizontalDrag({
-    sensitivity: 1.5,
-    momentumMultiplier: 0.08,
-    minimumVelocity: 0.3,
-    friction: 0.96,
-    momentumTimeout: 10,
-  });
+  const { sliderRef, isDragging, dragProps } = useHorizontalDrag();
 
   return (
     <section className={styles.featured}>
       <SegmentHeader label="Explore today" />
       <div ref={sliderRef} {...dragProps} className={`${styles.slider} ${isDragging ? styles.grabbing : ""}`}>
-        {Array.from(products).map((product) => (
+        {products.slice(0, 10).map((product) => (
           <ProductCard key={product.sku} {...product} />
         ))}
       </div>

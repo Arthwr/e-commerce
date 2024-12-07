@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@contexts/CartContext.jsx";
 import PropTypes from "prop-types";
 import logo from "@assets/svg/main-logo.svg";
@@ -31,6 +31,10 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, enableScrollHandler]);
 
+  const cartItemsCount = useMemo(() => {
+    return cartItems?.reduce((total, item) => total + item.quantity, 0) || 0;
+  }, [cartItems]);
+
   return (
     <header className={`${visible ? "" : styles.hidden} ${isStatic ? styles.alt : ""}`}>
       <nav>
@@ -52,7 +56,7 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
           <Link to="/cart">
             <img src={cartIcon} alt="" role="presentation" />
             <span>Cart</span>
-            <div className={styles.counter}>{cartItems?.length || 0}</div>
+            <div className={styles.counter}>{cartItemsCount}</div>
           </Link>
         </div>
       </nav>
