@@ -7,7 +7,6 @@ import styles from "./Cart.module.css";
 
 export default function Cart() {
   const { cartItems, getTotalCartPrice } = useCart();
-  console.log(cartItems);
 
   return (
     <section className={styles.cart}>

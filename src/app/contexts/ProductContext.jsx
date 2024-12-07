@@ -37,10 +37,6 @@ export const ProductProvider = ({ children }) => {
     };
   }, [fetchProduct]);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
   const contextValue = useMemo(
     () => ({
       products,
