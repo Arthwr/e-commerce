@@ -23,9 +23,6 @@ export default function Pagination({ totalCount, currentPage, pageSize, siblingC
     }
   };
 
-  console.log("Curent page:", currentPage);
-  console.log("Pagination range:", paginationRange.length);
-
   return (
     <div className={styles.pagination}>
       <div className={styles.wrapper}>
