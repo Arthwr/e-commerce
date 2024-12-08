@@ -10,7 +10,12 @@ vi.mock("@contexts/CartContext.jsx", () => ({
 
 describe("NavBar component", () => {
   it("renders cart counter correctly with mocked cart items", () => {
-    useCart.mockReturnValue({ cartItems: [{ id: 1 }, { id: 2 }] });
+    useCart.mockReturnValue({
+      cartItems: [
+        { sku: "aCasQ", quantity: 2 },
+        { sku: "asXzaqW", quantity: 1 },
+      ],
+    });
 
     render(
       <MemoryRouter>
@@ -18,7 +23,7 @@ describe("NavBar component", () => {
       </MemoryRouter>
     );
 
-    const cartCounter = screen.getByText("2");
+    const cartCounter = screen.getByText("3");
     expect(cartCounter).toBeInTheDocument();
   });
 
