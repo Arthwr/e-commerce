@@ -7,7 +7,7 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const url = "https://dummyjson.com/products?limit=10&skip=0&select=title,sku,price,description,images,rating";
+  const url = "https://dummyjson.com/products?limit=100&skip=0&select=title,sku,price,description,images,rating";
 
   const fetchProduct = useCallback(async (controllerSignal) => {
     try {

@@ -5,8 +5,8 @@ export default function ProductCounter({ count, onChange }) {
   const incrementCount = () => onChange(count + 1);
   const decrementCount = () => onChange(Math.max(1, count - 1));
   const handleInputChange = (e) => {
-    const value = Math.max(1, parseInt(e.target.value));
-    onChange(value);
+    const value = parseInt(e.target.value);
+    isNaN(value) ? onChange(1) : onChange(Math.max(1, value));
   };
 
   return (

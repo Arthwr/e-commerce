@@ -17,16 +17,29 @@
 }
 
 .wrapper .pagebtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1.5rem;
   height: 1.5rem;
   border: 1px solid var(--color-charcoal);
   line-height: 1;
 }
 
-.next {
+.nextpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid var(--color-charcoal);
   width: 50px;
   height: 24px;
+}
+
+.nextpage:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .pagebtn.active {

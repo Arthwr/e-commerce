@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext.jsx";
 import { ProductProvider } from "@contexts/ProductContext.jsx";
 import Root from "./routes/layouts/Root.jsx";
@@ -6,7 +7,6 @@ import ProductsPage from "./routes/pages/ProductsPage.jsx";
 import AboutPage from "./routes/pages/AboutPage.jsx";
 import CartPage from "./routes/pages/CartPage.jsx";
 import SingleProductPage from "./routes/pages/SingleProductPage.jsx";
-
 
 const routes = [
   {
@@ -25,6 +25,10 @@ const routes = [
       },
       {
         path: "products",
+        element: <Navigate to="/products/page/1" replace />,
+      },
+      {
+        path: "products/page/:page",
         element: <ProductsPage />,
       },
       {
