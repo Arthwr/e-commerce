@@ -6,45 +6,77 @@ const range = (start, end) => {
 };
 
 export default function usePagination({ totalCount, currentPage, pageSize = 10, siblingCount = 1 }) {
-  const paginationRange = useMemo(() => {
-    const totalPageNumbers = siblingCount + 4;
-    const totalPageCount = Math.ceil(totalCount / pageSize);
-    const DOTS = `...`;
+  return useMemo(() => {
+    const safeCount = Math.max(0, totalCount);
+    const totalPages = Math.ceil(safeCount / pageSize);
 
-    if (totalPageCount <= totalPageNumbers) {
-      return range(1, totalPageCount);
-    }
+    const calculatePaginationRange = () => {
+      const DOTS = "...";
+      const totalPageNumbers = siblingCount + 4;
 
-    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
-    const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPageCount);
+      if (totalPages <= totalPageNumbers) {
+        return range(1, totalPages);
+      }
 
-    const shouldShowLeftDots = leftSiblingIndex > 2;
-    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
+      const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
+      const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPages);
 
-    const firstPageIndex = 1;
-    const lastPageIndex = totalPageCount;
+      const shouldShowLeftDots = leftSiblingIndex > 2;
+      const shouldShowRightDots = rightSiblingIndex < totalPages - 2;
 
-    if (!shouldShowLeftDots && shouldShowRightDots) {
-      let visibleLeftPages = 3 + 2 * siblingCount;
-      let leftRange = range(1, visibleLeftPages);
+      const firstPageIndex = 1;
+      const lastPageIndex = totalPages;
 
-      return [...leftRange, DOTS, totalPageCount];
-    }
+      if (!shouldShowLeftDots && shouldShowRightDots) {
+        let visibleLeftPages = 3 + 2 * siblingCount;
+        let leftRange = range(1, visibleLeftPages);
 
-    if (shouldShowLeftDots && !shouldShowRightDots) {
-      let visibleRightPages = 3 + 2 * siblingCount;
-      let rightRange = range(totalPageCount - visibleRightPages + 1, totalPageCount);
+        return [...leftRange, DOTS, lastPageIndex];
+      }
 
-      return [firstPageIndex, DOTS, ...rightRange];
-    }
+      if (shouldShowLeftDots && !shouldShowRightDots) {
+        let visibleRightPages = 3 + 2 * siblingCount;
+        let rightRange = range(totalPages - visibleRightPages + 1, totalPages);
 
-    if (shouldShowLeftDots && shouldShowRightDots) {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
-    }
+        return [firstPageIndex, DOTS, ...rightRange];
+      }
 
-    return [];
+      if (shouldShowLeftDots && shouldShowRightDots) {
+        let middleRange = range(leftSiblingIndex, rightSiblingIndex);
+
+        return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+      }
+
+      return [];
+    };
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize, totalCount);
+
+    return {
+      // Pagination range for rendering page numbers
+      paginationRange: calculatePaginationRange(),
+
+      // Pagination metdata
+      currentPage,
+      totalPages,
+      pageSize,
+      totalCount,
+
+      // Slice indices for current page items
+      startIndex,
+      endIndex,
+
+      // Utility methods
+      isFirstPage: currentPage === 1,
+      isLastPage: currentPage === totalPages,
+
+      // Pagination helpers
+      getNextPage: () => Math.min(currentPage + 1, totalPages),
+      getPreviousPage: () => Math.max(currentPage - 1, 1),
+
+      // Check if specific page is current
+      isCurrentPage: (page) => page === currentPage,
+    };
   }, [totalCount, pageSize, currentPage, siblingCount]);
-
-  return paginationRange;
 }
