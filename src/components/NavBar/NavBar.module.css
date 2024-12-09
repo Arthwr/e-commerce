@@ -97,7 +97,7 @@ nav {
   gap: 0.75rem;
 }
 
-.right > *:hover {
+.right > button:hover {
   color: var(--color-light-red);
 }
 

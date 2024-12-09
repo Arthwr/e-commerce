@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@contexts/CartContext.jsx";
+import Search from "@components/Search/Search.jsx";
 import PropTypes from "prop-types";
 import logo from "@assets/svg/main-logo.svg";
 import searchIcon from "@assets/svg/search-icon.svg";
@@ -10,6 +11,7 @@ import styles from "./NavBar.module.css";
 export default function NavBar({ isAnimating = false, isStatic = false, enableScrollHandler = true }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [searchVisible, setSearchVisible] = useState(false);
   const { cartItems } = useCart();
 
   useEffect(() => {
@@ -48,10 +50,14 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
           </div>
         </div>
         <div className={styles.right}>
-          <button>
-            <img src={searchIcon} alt="search icon" role="presentation" />
-            <span>Search</span>
-          </button>
+          {searchVisible ? (
+            <Search onClose={() => setSearchVisible(false)} />
+          ) : (
+            <button onClick={() => setSearchVisible(true)}>
+              <img src={searchIcon} alt="search icon" role="presentation" />
+              <span>Search</span>
+            </button>
+          )}
           <Link to="/cart">
             <img src={cartIcon} alt="" role="presentation" />
             <span>Cart</span>
