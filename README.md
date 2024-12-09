@@ -9,8 +9,6 @@ Currently, two official plugins are available:
 
 ## Possible's to do:
 
-1. fix layout shift with images in featured products carousel & products gallery
-3. implement search
 4. implement local storage for cart items
 5. implement caching?
 7. implement fallback for single product (if fetch wont work)

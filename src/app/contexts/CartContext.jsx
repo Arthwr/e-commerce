@@ -27,6 +27,10 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.sku !== itemId));
   }, []);
 
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+  }, [setCartItems]);
+
   const updateQuantity = useCallback(
     (itemId, newQuantity) => {
       if (newQuantity <= 0) {
@@ -50,8 +54,9 @@ export const CartProvider = ({ children }) => {
       removeFromCart,
       updateQuantity,
       getTotalCartPrice,
+      clearCart,
     }),
-    [cartItems, addToCart, removeFromCart, updateQuantity, getTotalCartPrice]
+    [cartItems, addToCart, removeFromCart, updateQuantity, getTotalCartPrice, clearCart]
   );
   return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 };

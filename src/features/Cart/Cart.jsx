@@ -6,7 +6,7 @@ import img from "@assets/images/cart-topbg.webp";
 import styles from "./Cart.module.css";
 
 export default function Cart() {
-  const { cartItems, getTotalCartPrice } = useCart();
+  const { cartItems, clearCart, getTotalCartPrice } = useCart();
 
   return (
     <section className={styles.cart}>
@@ -32,7 +32,7 @@ export default function Cart() {
             <span className={styles["total-price"]}>{`${getTotalCartPrice()} $`}</span>
           </div>
           <div className={styles.actions}>
-            <ActionButton path="/checkout" label="Checkout" ariaLabel="confirm purchase" />
+            <ActionButton path="/checkout" label="Checkout" ariaLabel="confirm purchase" onClick={() => clearCart()} />
             <Link to="/products" className={styles.return}>
               Keep shopping
             </Link>

@@ -7,6 +7,8 @@ import ProductsPage from "./routes/pages/ProductsPage.jsx";
 import AboutPage from "./routes/pages/AboutPage.jsx";
 import CartPage from "./routes/pages/CartPage.jsx";
 import SingleProductPage from "./routes/pages/SingleProductPage.jsx";
+import CheckoutPage from "./routes/pages/CheckoutPage.jsx";
+import ErrorPage from "./routes/pages/ErrorPage.jsx";
 
 const routes = [
   {
@@ -18,6 +20,7 @@ const routes = [
         </CartProvider>
       </ProductProvider>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "",
@@ -42,6 +45,10 @@ const routes = [
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "checkout",
+        element: <CheckoutPage />,
       },
     ],
   },
