@@ -22,7 +22,6 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
       const currentScrollPos = window.scrollY;
 
       setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 50);
-
       setPrevScrollPos(currentScrollPos);
     };
 
@@ -56,7 +55,7 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
           <Link to="/cart">
             <img src={cartIcon} alt="" role="presentation" />
             <span>Cart</span>
-            <div className={styles.counter}>{cartItemsCount}</div>
+            {cartItemsCount > 0 && <div className={styles.counter}>{cartItemsCount}</div>}
           </Link>
         </div>
       </nav>
