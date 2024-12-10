@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./routes.jsx";
 import "../styles/index.css";
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, { basename: "/e-commerce/" });
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
