@@ -37,7 +37,7 @@ export default function NavBar({ isAnimating = false, isStatic = false, enableSc
   }, [cartItems]);
 
   return (
-    <header className={`${visible ? "" : styles.hidden} ${isStatic ? styles.alt : ""}`}>
+    <header className={`${visible ? "" : styles.hidden} ${isStatic ? styles.alt : ""}`.trim()}>
       <nav>
         <div className={styles.left}>
           <div className={`${styles.logo} ${isAnimating ? styles.visible : ""}`}>

@@ -1,12 +1,29 @@
 import PropTypes from "prop-types";
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 const CartContext = createContext(null);
 
+const getStoredCart = () => {
+  const storedCart = localStorage.getItem("cart");
+  return storedCart ? JSON.parse(storedCart) : [];
+};
+
+const saveToCartStorage = (cart) => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(getStoredCart);
+
+  useEffect(() => {
+    saveToCartStorage(cartItems);
+  }, [cartItems]);
 
   const addToCart = useCallback((newItem, quantity) => {
+    if (quantity <= 0) {
+      throw new Error("Quantity must be greater than 0");
+    }
+
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex((item) => item.sku === newItem.sku);
 
