@@ -11,8 +11,17 @@ export default function SingleProduct() {
   const [productCount, setProductCount] = useState(1);
   const { addToCart } = useCart();
   const { productId } = useParams();
-  const { products } = useProduct();
+  const { products, isLoading } = useProduct();
   const product = products.find((item) => item.sku === productId);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!product) {
+    return <div>Product not found.</div>;
+  }
+
   const { title, price, description, images } = product;
 
   return (
